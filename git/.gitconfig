@@ -1,0 +1,16 @@
+[user]
+	name = Jason T. Wong
+	email = developer@jasontwong.com
+[core]
+	exludesfile = /Users/plumsicle/.gitignore
+[merge]
+	tool = gvimdiff
+	conflictstyle = diff3
+[mergetool]
+	keepBackup = false
+	prompt = false
+[color]
+	branch = auto
+	diff = auto
+	interactive = auto
+	status = auto
