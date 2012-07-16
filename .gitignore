@@ -56,4 +56,5 @@ build/
 *.mode2v3
 xcuserdata
 
-config.database.php
+backup
+temp
