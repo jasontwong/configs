@@ -56,4 +56,6 @@ build/
 *.mode2v3
 xcuserdata
 
-config.database.php
+# SublimeText2 #
+################
+*.sublime-workspace
