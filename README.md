@@ -1,4 +1,23 @@
-configs
-=======
+Global
+======
 
-configuration files
+oh-my-zsh
+---------
+A community-driven framework for managing zsh configurations with plugins. [[website](https://github.com/robbyrussell/oh-my-zsh/)]
+
+tmux
+----
+A terminal multiplexer. [[website](http://tmux.sourceforge.net/)]
+
+Mac OS X
+========
+
+TotalTerminal
+-------------
+Quake style dropdown terminal. [[website](http://totalterminal.binaryage.com/)]
+- Add key "LSUIElement" with value "1" to "/Applications/Utilities/Terminal.app/Contents/Info.plist" to hide dock icon and alt+tab icon
+- Run the command "defaults write com.apple.Terminal TotalTerminalCloseWindowsOnStart -bool YES" to hide the initial window on total terminal startup
+
+Homebrew
+--------
+Allows the use of UNIX tools in OSX. [[website](http://mxcl.github.com/homebrew/)]

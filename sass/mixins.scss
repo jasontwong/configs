@@ -1,5 +1,0 @@
-@mixin box-model($max_height: auto, $max_width: auto, $ptop: 0, $pright: $ptop, $pbottom: $ptop, $pleft: $pright) {
-    @if type-of($max_height) == number { height: $max_height - $ptop - $pbottom }
-    padding: $ptop $pright $pbottom $pleft;
-    @if type-of($max_width) == number { width: $max_width - $pright - $pleft }
-}
