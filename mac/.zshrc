@@ -35,7 +35,7 @@ plugins=(vi-mode)
 source $ZSH/oh-my-zsh.sh
 
 # Customize to your needs...
-export PATH=/opt/local/bin:/opt/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:/Users/K10/projects/android/tools
+export PATH=/opt/local/bin:/opt/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin
 if (( ${+widgets[.history-incremental-pattern-search-backward]} )); then
     bindkey -M vicmd '/' history-incremental-pattern-search-backward
     bindkey -M isearch '^F' history-incremental-pattern-search-backward
