@@ -21,3 +21,9 @@ Quake style dropdown terminal. [[website](http://totalterminal.binaryage.com/)]
 Homebrew
 --------
 Allows the use of UNIX tools in OSX. [[website](http://mxcl.github.com/homebrew/)]
+
+Extended attributes
+-------------------
+This is akin to ACL's. Used mainly for systems using shared folders.
+
+    chmod +a "group:examplegroup allow list,add_file,search,add_subdirectory,delete_child,readattr,writeattr,readextattr,writeextattr,readsecurity,file_inherit,directory_inherit" /path/to/folder
