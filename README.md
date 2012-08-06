@@ -21,3 +21,7 @@ Quake style dropdown terminal. [[website](http://totalterminal.binaryage.com/)]
 Homebrew
 --------
 Allows the use of UNIX tools in OSX. [[website](http://mxcl.github.com/homebrew/)]
+
+XVim
+----
+This is a plugin for Xcode to get the source editor to be more vim-like. [[website](https://github.com/JugglerShu/XVim)]
