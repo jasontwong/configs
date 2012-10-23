@@ -31,3 +31,9 @@ This is akin to ACL's. Used mainly for systems using shared folders.
 XVim
 ----
 This is a plugin for Xcode to get the source editor to be more vim-like. [[website](https://github.com/JugglerShu/XVim)]
+
+Reattach to user namespace
+--------------------------
+This application fixes copy/paste for Mac OSX when using tmux
+
+    brew install reattach-to-user-namespace
