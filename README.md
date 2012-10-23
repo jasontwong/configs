@@ -9,6 +9,14 @@ tmux
 ----
 A terminal multiplexer. [[website](http://tmux.sourceforge.net/)]
 
+vim plugins
+-----------
+ctrlp [[website](https://github.com/kien/ctrlp.vim)]
+- Allows searching of files to open
+
+jslint [[website](https://github.com/hallettj/jslint.vim)]
+- JavaScript linting built in
+
 Mac OS X
 ========
 
