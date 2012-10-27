@@ -1,2 +1,2 @@
-/*jslint white: true, plusplus: true, maxerr: 50, indent: 4 */
-/*global jQuery, $, console, window, location, pathname, document, history, alert */
+/*jslint eqeq: true, white: true, plusplus: true, maxerr: 50, indent: 4 */
+/*global jQuery, $, console, window, location, pathname, document, history, alert, confirm, setTimeout, setInterval, clearTimeout, clearInterval */
