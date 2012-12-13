@@ -53,4 +53,3 @@ fi
 
 bindkey -M menuselect '^M' .accept-line
 export EDITOR=vim
-setopt menu_complete
