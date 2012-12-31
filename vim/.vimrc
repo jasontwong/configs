@@ -31,6 +31,7 @@ au BufNewFile,BufRead *.css.php set syntax=css
 au BufNewFile,BufRead *.xml.php set syntax=xml
 au BufNewFile,BufRead *.zsh-theme set ft=zsh syntax=zsh
 au BufNewFile,BufRead *.scss set syntax=scss
+au BufNewFile,BufRead *.pp set syntax=puppet
 
 " plugin
 filetype plugin on
