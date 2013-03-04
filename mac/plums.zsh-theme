@@ -15,7 +15,8 @@ function truncated_pwd {
     echo $NEW_PWD
 }
 
-PROMPT='[%n➜ %m $(truncated_pwd)]$ '
+PROMPT='[%{$fg[magenta]%}%D %{$fg[cyan]%}%T%{$reset_color%} %n➜ %m %{$fg[blue]%}%~%{$reset_color%}]
+%{$fg[green]%}➤%{$reset_color%} '
 # PROMPT='%{$fg_bold[red]%}➜ %{$fg_bold[green]%}%p %{$fg[cyan]%}%c %{$reset_color%}'
 # PROMPT='%{$fg_bold[red]%}➜ %{$fg_bold[green]%}%p %{$fg[cyan]%}%c %{$fg_bold[blue]%}$(git_prompt_info)%{$fg_bold[blue]%} % %{$reset_color%}'
 
