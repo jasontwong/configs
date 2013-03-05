@@ -1,34 +1,9 @@
-function truncated_pwd {
-    # How many characters of the $PWD should be kept
-    local pwdmaxlen=25
-    # Indicate that there has been dir truncation
-    local trunc_symbol=".."
-    local dir=${PWD##*/}
-    pwdmaxlen=$(( ( pwdmaxlen < ${#dir} ) ? ${#dir} : pwdmaxlen ))
-    NEW_PWD=${PWD/#$HOME/\~}
-    local pwdoffset=$((${#NEW_PWD} - pwdmaxlen))
-    if [[ pwdoffset -gt 0 ]]
-    then
-        NEW_PWD=$NEW_PWD[pwdoffset,$]
-        NEW_PWD=${trunc_symbol}/${NEW_PWD#*/}
-    fi
-    echo $NEW_PWD
-}
-
-PROMPT='[%{$fg[magenta]%}%D %{$fg[cyan]%}%T%{$reset_color%} %n➜ %m %{$fg[blue]%}%~%{$reset_color%}]
-%{$fg[green]%}➤%{$reset_color%} '
-# PROMPT='%{$fg_bold[red]%}➜ %{$fg_bold[green]%}%p %{$fg[cyan]%}%c %{$reset_color%}'
-# PROMPT='%{$fg_bold[red]%}➜ %{$fg_bold[green]%}%p %{$fg[cyan]%}%c %{$fg_bold[blue]%}$(git_prompt_info)%{$fg_bold[blue]%} % %{$reset_color%}'
+PROMPT='$FG[011][$FG[128]%D %{$fg[cyan]%}%*%{$reset_color%} $FG[172]%n➜ %m %{$fg[blue]%}%~$FG[011]]%{$reset_color%}
+$FG[046]➤%{$reset_color%} '
 
 ZSH_THEME_GIT_PROMPT_PREFIX="git:(%{$fg[red]%}"
 ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%}"
-ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg[blue]%}) %{$fg[yellow]%}✗%{$reset_color%}"
-ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg[blue]%})"
+ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg[blue]%}) %{$fg[yellow]%}✗"
+ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg[blue]%}) $FG[046]✔"
 
-# ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg[magenta]%}"
-# ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%}"
-# ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg[green]%}!"
-# ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$fg[green]%}?"
-# ZSH_THEME_GIT_PROMPT_CLEAN=""
-
-RPROMPT='$(vi_mode_prompt_info) %{$fg_bold[blue]%}$(git_prompt_info)%{$fg_bold[blue]%}%{$reset_color%}'
+RPROMPT='$(vi_mode_prompt_info) %{$fg_bold[blue]%}$(git_prompt_info)%{$reset_color%}'
