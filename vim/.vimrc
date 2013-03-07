@@ -7,9 +7,9 @@ filetype plugin indent on
 syntax on
 colorscheme desert
 set showmatch " show matching brackets
-au FileType php,django,htmldjango setlocal sw=4 sts=4
+au FileType php,python,django,htmldjango setlocal sw=4 sts=4
+au FileType sass,scss set syntax=sass
 au BufNewFile,BufRead *.pp set syntax=puppet
-au BufNewFile,BufRead *.scss set syntax=scss
 au BufNewFile,BufRead *.zsh-theme set ft=zsh syntax=zsh
 
 " options
