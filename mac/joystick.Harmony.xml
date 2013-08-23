@@ -85,7 +85,7 @@
       <!-- Aspect	-->      <button id="61">AspectRatio</button>
       <!-- F1		-->      <button id="53">XBMC.ActivateWindow(Music)</button>
       <!-- F3			--> <button id="55">XBMC.ActivateWindow(Videos,RecentlyAddedEpisodes,Return)</button>
-      <!-- F2			--> <button id="54">XBMC.ActivateWindow(Videos,IRecentlyAddedMovies,Return)</button>
+      <!-- F2			--> <button id="54">XBMC.ActivateWindow(Videos,RecentlyAddedMovies,Return)</button>
       <!-- F4		-->      <button id="56">XBMC.ActivateWindow(Weather)</button>
       <!-- F5			-->  <button id="93">OSD</button>
       <!-- F7			-->  <button id="95">XBMC.ActivateWindow(Home)</button>
