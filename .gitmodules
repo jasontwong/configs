@@ -33,4 +33,4 @@
   url = https://github.com/vim-ruby/vim-ruby.git
 [submodule "vim/bundle/vim-twig"]
   path = "vim/bundle/vim-twig"
-  url = https://github.com/lunaru/vim-twig.git
+  url = https://github.com/evidens/vim-twig.git
