@@ -34,8 +34,6 @@ plugins=(vi-mode)
 
 source $ZSH/oh-my-zsh.sh
 
-# Customize to your needs...
-export PATH=/opt/local/bin:/opt/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin
 if (( ${+widgets[.history-incremental-pattern-search-backward]} )); then
     bindkey -M vicmd '/' history-incremental-pattern-search-backward
     bindkey -M isearch '^F' history-incremental-pattern-search-backward
@@ -53,3 +51,27 @@ fi
 
 bindkey -M menuselect '^M' .accept-line
 export EDITOR=vim
+unsetopt correct_all
+
+# Customize to your needs...
+export PATH=/usr/local/bin:$PATH:/opt/local/bin:/opt/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin
+
+# PATH="$(brew --prefix josegonzalez/php/php54)/bin:$PATH" # For php54
+# 
+# PATH=$PATH:$HOME/Documents/aws-eb-cli/eb/linux/python2.7
+# 
+# # JAVA_HOME=$(/usr/libexec/java_home)
+# 
+# AWS_IAM_HOME=$HOME/Documents/aws-iam-cli
+# # AWS_CREDENTIAL_FILE=$HOME/.ssh/aws-account-key
+# 
+# PATH=$PATH:$AWS_IAM_HOME/bin
+# 
+# ### Added by the Heroku Toolbelt
+# export PATH="/usr/local/heroku/bin:$PATH"
+# 
+# source ~/.bin/tmuxinator.zsh
+# 
+# [[ -s $HOME/.tmuxinator/scripts/tmuxinator ]] && source $HOME/.tmuxinator/scripts/tmuxinator # tmuxinator
+# 
+# export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
