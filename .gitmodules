@@ -32,5 +32,8 @@
   path = "vim/bundle/vim-ruby"
   url = https://github.com/vim-ruby/vim-ruby.git
 [submodule "vim/bundle/vim-twig"]
-	path = vim/bundle/vim-twig
-	url = https://github.com/evidens/vim-twig.git
+  path = vim/bundle/vim-twig
+  url = https://github.com/evidens/vim-twig.git
+[submodule "vim/bundle/vim-slim"]
+  path = vim/bundle/vim-slim
+  url = https://github.com/slim-template/vim-slim.git
