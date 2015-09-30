@@ -20,3 +20,4 @@
   lg = !"git --no-pager lg1 -n 10"
 [core]
   excludesfile = /Users/jwong/.gitignore
+[heroku]

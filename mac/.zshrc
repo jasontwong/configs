@@ -30,7 +30,7 @@ COMPLETION_WAITING_DOTS="true"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(vi-mode)
+plugins=(vi-mode bundler git)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -56,3 +56,7 @@ unsetopt nomatch
 
 # Customize to your needs...
 export PATH=/usr/local/bin:$PATH:/opt/local/bin:/opt/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin
+
+export PATH=$HOME/.rbenv/shims:$PATH
+
+if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
