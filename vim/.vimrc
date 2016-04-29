@@ -1,67 +1,34 @@
-" pathogen
+" dein.vim
+if &compatible
+  set nocompatible
+endif
+set runtimepath^=~/.vim/dein/repos/github.com/Shougo/dein.vim
+
 filetype off
-execute pathogen#infect()
+
+let path = expand('~/.vim/dein')
+call dein#begin(path)
+call dein#add('scrooloose/syntastic')
+call dein#add('tpope/vim-vinegar')
+call dein#add('vim-ruby/vim-ruby')
+call dein#add('tpope/vim-sensible')
+call dein#add('elzr/vim-json')
+call dein#add('SirVer/ultisnips')
+call dein#add('isRuslan/vim-es6')
+call dein#add('pangloss/vim-javascript')
+call dein#add('mxw/vim-jsx')
+call dein#add('slim-template/vim-slim')
+call dein#add('ctrlpvim/ctrlp.vim')
+call dein#end()
+
+if dein#check_install()
+  call dein#install()
+endif
+
 filetype plugin indent on
 
-" visual
-syntax on
-colorscheme desert
-set showmatch " show matching brackets
-au FileType python,django,htmldjango setlocal sw=4 sts=4
-au FileType sass,scss set syntax=sass
-au BufNewFile,BufRead *.pp set syntax=puppet
-au BufNewFile,BufRead *.zsh-theme set ft=zsh syntax=zsh
-
-" options
-set nocompatible
-set hidden " persisitent undo and allow buffer switching without saving
-set wildmenu " better command-line completion
-set showcmd " show partial commands
-set nomodeline " disable modelines
-set autoindent
-set number
-set nowrap
-set ruler
-
-" tabs
-set shiftwidth=2
-set softtabstop=2
-set expandtab
-
-" allow backspacing over autoindent, line breaks and start of insert action
-set backspace=indent,eol,start
-
-" mapping
-map Y y$
-nnoremap <C-L> :nohl<CR><C-L>
-
-" folds
-set foldenable
-set foldmethod=marker
-
-" backup
-set backup
-set backupdir=~/.vim/backup/
-set directory=~/.vim/temp/
-
-" disable bells
-set visualbell
-set t_vb=
-
-" ctrlp plugin
-let g:ctrlp_regexp = 1
-let g:ctrlp_working_path_mode = 'ra'
-let g:ctrlp_show_hidden = 1
-let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/]\.(git|hg|svn|sass-cache)$',
-  \ 'file': '\v\.(exe|so|dll|so|swp|zip)$',
-  \ 'link': 'some_bad_symbolic_links',
-  \ }
-let g:ctrlp_open_new_file = 'r'
-let g:ctrlp_open_multiple_files = '0'
-let g:ctrlp_mruf_relative = 1
-
-" vim-ruby plugin
-let ruby_operators = 1
-hi def link rubyArrayDelimiter Function
-hi def link rubyCurlyBlockDelimiter Function
+source ~/.vim/setup/general.vim
+source ~/.vim/setup/javascript.vim
+source ~/.vim/setup/syntastic.vim
+source ~/.vim/setup/ruby.vim
+source ~/.vim/setup/ctrlp.vim

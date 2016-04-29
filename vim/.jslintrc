@@ -1,2 +1,0 @@
-/*jslint eqeq: true, white: true, plusplus: true, maxerr: 50, indent: 2, sloppy: true */
-/*global jQuery, $, console, window, location, pathname, document, history, alert, confirm, setTimeout, setInterval, clearTimeout, clearInterval, Ember */
