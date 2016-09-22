@@ -21,6 +21,9 @@ A terminal multiplexer. [[website](http://tmux.sourceforge.net/)]
 [vim-vinegar](https://github.com/tpope/vim-vinegar)
 - directory navigation and traversal
 
+# Spacemacs
+Another editor. [[website](http://spacemacs.org/)]
+
 # iTerm2
 A better terminal. [[website](https://www.iterm2.com/)]
 

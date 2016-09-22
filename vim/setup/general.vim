@@ -1,6 +1,6 @@
 " visual
 syntax on
-colorscheme desert
+colo moriarty
 set showmatch " show matching brackets
 au FileType python,django,htmldjango setlocal sw=4 sts=4
 
@@ -13,6 +13,7 @@ set autoindent
 set number
 set nowrap
 set ruler
+set cursorline
 
 " tabs
 set shiftwidth=2
@@ -24,6 +25,7 @@ set backspace=indent,eol,start
 
 " mapping
 map Y y$
+set hlsearch
 nnoremap <C-L> :nohl<CR><C-L>
 
 " folds
@@ -38,3 +40,8 @@ set directory=~/.vim/temp/
 " disable bells
 set visualbell
 set t_vb=
+
+" insert mode vertical cursor
+let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
+let &t_SR = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=2\x7\<Esc>\\"
+let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"

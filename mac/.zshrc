@@ -50,13 +50,9 @@ else
 fi
 
 bindkey -M menuselect '^M' .accept-line
+export VISUAL=vim
 export EDITOR=vim
 unsetopt correct_all
 unsetopt nomatch
 
 # Customize to your needs...
-export PATH=/usr/local/bin:$PATH:/opt/local/bin:/opt/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin
-
-export PATH=$HOME/.rbenv/shims:$PATH
-
-if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi

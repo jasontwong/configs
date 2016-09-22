@@ -1,6 +1,7 @@
 [user]
   name = Jason T. Wong
   email = developer@jasontwong.com
+  signingkey = 2C04BABD
 [merge]
   tool = vimdiff
   conflictstyle = diff3
@@ -19,5 +20,8 @@
   lg2 = log --graph --all --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(bold white)— %an%C(reset)' --abbrev-commit
   lg = !"git --no-pager lg1 -n 10"
 [core]
-  excludesfile = /Users/jwong/.gitignore
+  excludesfile = ~/.gitignore
 [heroku]
+[commit]
+  template = ~/.gitmessage
+  gpgsign = true
