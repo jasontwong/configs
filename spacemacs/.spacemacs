@@ -57,6 +57,7 @@ values."
      editorconfig
      flycheck-flow
      helm-ls-git
+     tern-auto-complete
      )
    ;; A list of packages and/or extensions that will not be install and loaded.
    dotspacemacs-excluded-packages '()
@@ -219,7 +220,7 @@ values."
    ;; If non nil smooth scrolling (native-scrolling) is enabled. Smooth
    ;; scrolling overrides the default behavior of Emacs which recenters the
    ;; point when it reaches the top or bottom of the screen. (default t)
-   dotspacemacs-smooth-scrolling t
+   dotspacemacs-smooth-scrolling nil
    ;; If non nil line numbers are turned on in all `prog-mode' and `text-mode'
    ;; derivatives. If set to `relative', also turns on relative line numbers.
    ;; (default nil)
@@ -257,6 +258,11 @@ executes.
  This function is mostly useful for variables that need to be set
 before packages are loaded. If you are unsure, you should try in setting them in
 `dotspacemacs/user-config' first."
+  ;; shells
+  (setenv "PATH" (shell-command-to-string "/bin/zsh -c 'echo -n $PATH'"))
+  (add-to-list 'auto-mode-alist '("\\.zsh$" . shell-script-mode))
+  (add-to-list `exec-path "/Users/jwong/.nvm/versions/node/v6.6.0/bin/")
+
   (add-hook 'react-mode-hook 'emmet-mode)
   )
 
@@ -282,16 +288,37 @@ you should place your code here."
     )
 
   ;; Defaults
+  (require 'flycheck)
   (setq-default truncate-lines t)
   (my-setup-indent 2)
   (setq require-final-newline t)
   (setq mode-require-final-newline t)
+  (setq scroll-conservatively 101
+        scroll-margin 1
+        scroll-preserve-screen-position 't)
+
 
   ;; JS Syntax Checker
-  (add-to-list `exec-path "/Users/jwong/.nvm/versions/node/v6.0.0/bin/")
   (setq js2-mode-show-parse-errors nil
         js2-mode-show-strict-warnings nil)
-  (setq flycheck-javascript-eslint-executable "eslint_d")
+  ;; (setq flycheck-javascript-eslint-executable "eslint_d")
+  (defun feltnerm/setup-local-eslint ()
+    "If ESLint found in node_modules directory - use that for flycheck.
+Intended for use in PROJECTILE-AFTER-SWITCH-PROJECT-HOOK."
+    (interactive)
+    (let ((local-eslint (expand-file-name (concat (projectile-project-root) "node_modules/.bin/eslint"))))
+      (setq flycheck-javascript-eslint-executable
+            (and (file-exists-p local-eslint) local-eslint))))
+  (with-eval-after-load 'projectile
+    (add-hook 'projectile-after-switch-project-hook 'feltnerm/setup-local-eslint))
+  (defun codefalling//reset-eslint-rc ()
+    (let ((rc-path (if (projectile-project-p)
+                       (concat (projectile-project-root) ".eslintrc"))))
+      (if (file-exists-p rc-path)
+          (progn
+            (message rc-path)
+            (setq flycheck-eslintrc rc-path)))))
+  (add-hook 'flycheck-mode-hook 'codefalling//reset-eslint-rc)
 
   ;; Diff HL
   (diff-hl-flydiff-mode t)
@@ -299,12 +326,23 @@ you should place your code here."
   (setq diff-hl-side 'right)
 
   ;; React
-  (require 'flycheck)
-  (require 'flycheck-flow)
   (add-to-list 'auto-mode-alist '("\\.js\\'" . react-mode))
-  (flycheck-add-mode 'javascript-flow 'react-mode)
-  (add-to-list 'flycheck-checkers 'javascript-flow)
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+   (quote
+    (tern-auto-complete xterm-color ws-butler window-numbering web-mode web-beautify volatile-highlights vi-tilde-fringe tagedit spacemacs-theme spaceline powerline smooth-scrolling slim-mode shell-pop scss-mode sass-mode rvm ruby-tools ruby-test-mode ruby-end rubocop rspec-mode robe reveal-in-osx-finder restart-emacs rbenv rainbow-delimiters projectile-rails rake inflections f popwin persp-mode pcre2el pbcopy paradox hydra spinner page-break-lines osx-trash open-junk-file neotree multi-term move-text macrostep lorem-ipsum linum-relative leuven-theme less-css-mode launchctl json-mode json-snatcher json-reformat js2-refactor multiple-cursors js2-mode js-doc jade-mode info+ indent-guide ido-vertical-mode hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation help-fns+ helm-themes helm-swoop helm-projectile helm-mode-manager helm-make projectile helm-ls-git helm-flx helm-descbinds helm-css-scss helm-company helm-c-yasnippet helm-ag haml-mode google-translate golden-ratio git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ git-commit with-editor git-gutter flycheck-pos-tip flycheck-flow flycheck flx-ido flx fill-column-indicator feature-mode fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-args evil-anzu anzu eval-sexp-fu highlight eshell-prompt-extras esh-help emmet-mode elisp-slime-nav editorconfig diff-hl define-word company-web web-completion-data company-tern s dash-functional tern company-statistics company-quickhelp pos-tip coffee-mode clean-aindent-mode chruby bundler inf-ruby buffer-move bracketed-paste auto-yasnippet yasnippet auto-highlight-symbol auto-compile packed alchemist company dash elixir-mode pkg-info epl aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core async ac-ispell auto-complete popup quelpa package-build use-package which-key bind-key bind-map evil monokai-theme))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(company-tooltip-common ((t (:inherit company-tooltip :weight bold :underline nil))))
+ '(company-tooltip-common-selection ((t (:inherit company-tooltip-selection :weight bold :underline nil)))))
