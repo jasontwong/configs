@@ -27,6 +27,8 @@ Another editor. [[website](http://spacemacs.org/)]
 # iTerm2
 A better terminal. [[website](https://www.iterm2.com/)]
 
+- hide from dock `/usr/libexec/PlistBuddy -c 'Add :LSUIElement bool true' /Applications/iTerm.app/Contents/Info.plist`
+
 # Homebrew
 Allows the use of UNIX tools in OSX. [[website](http://mxcl.github.com/homebrew/)]
 
