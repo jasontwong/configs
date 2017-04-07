@@ -31,52 +31,35 @@ values."
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
    '(
-     swift
-     csv
-     markdown
      ;; ----------------------------------------------------------------
      ;; Example of useful layers you may want to use right away.
      ;; Uncomment some layer names and press <SPC f e R> (Vim style) or
      ;; <M-m f e R> (Emacs style) to install them.
      ;; ----------------------------------------------------------------
      auto-completion
-     better-defaults
      elixir
+     helm
+     ;; better-defaults
      emacs-lisp
      git
-     html
-     javascript
-     ;; markdown
-     ;; org
+     markdown
+     org
      osx
-     python
      react
-     ruby
-     ruby-on-rails
-     (shell :variables
-            shell-default-shell 'multiterm
-            shell-default-term-shell "/bin/zsh"
-            shell-default-height 30
-            shell-default-position 'bottom)
+     ;; (shell :variables
+     ;;        shell-default-height 30
+     ;;        shell-default-position 'bottom)
      ;; spell-checking
-     (syntax-checking :variables
-                      syntax-checking-enable-tooltips nil)
-     (version-control :variables
-                      version-control-global-margin t
-                      ;; version-control-diff-tool 'diff-hl)
-                      version-control-diff-tool 'git-gutter+)
-     yaml
+     syntax-checking
+     version-control
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
-   dotspacemacs-additional-packages '( editorconfig
-                                       elm-mode
-                                       flycheck-elm
-                                       flycheck-flow
-                                       helm-ls-git
-                                       tern-auto-complete)
+   dotspacemacs-additional-packages '(editorconfig
+                                      helm-ls-git
+                                      tern-auto-complete)
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
    ;; A list of packages that will not be installed and loaded.
@@ -137,11 +120,10 @@ values."
    ;; the form `(list-type . list-size)`. If nil then it is disabled.
    ;; Possible values for list-type are:
    ;; `recents' `bookmarks' `projects' `agenda' `todos'."
-   ;; Example for 5 recent files and 7 projects: '((recents . 5) (projects . 7))
    ;; List sizes may be nil, in which case
    ;; `spacemacs-buffer-startup-lists-length' takes effect.
-   ;; (default nil)
-   dotspacemacs-startup-lists '((projects . 7))
+   dotspacemacs-startup-lists '((recents . 5)
+                                (projects . 7))
    ;; True if the home buffer should respond to resize events.
    dotspacemacs-startup-buffer-responsive t
    ;; Default major mode of the scratch buffer (default `text-mode')
@@ -175,7 +157,7 @@ values."
    ;; pressing `<leader> m`. Set it to `nil` to disable it. (default ",")
    dotspacemacs-major-mode-leader-key ","
    ;; Major mode leader key accessible in `emacs state' and `insert state'.
-   ;; (default "C-M-m)
+   ;; (default "C-M-m")
    dotspacemacs-major-mode-emacs-leader-key "C-M-m"
    ;; These variables control whether separate commands are bound in the GUI to
    ;; the key pairs C-i, TAB and C-m, RET.
@@ -269,14 +251,24 @@ values."
    ;; If non nil smooth scrolling (native-scrolling) is enabled. Smooth
    ;; scrolling overrides the default behavior of Emacs which recenters point
    ;; when it reaches the top or bottom of the screen. (default t)
-   dotspacemacs-smooth-scrolling nil
-   ;; If non nil line numbers are turned on in all `prog-mode' and `text-mode'
-   ;; derivatives. If set to `relative', also turns on relative line numbers.
+   dotspacemacs-smooth-scrolling t
+   ;; Control line numbers activation.
+   ;; If set to `t' or `relative' line numbers are turned on in all `prog-mode' and
+   ;; `text-mode' derivatives. If set to `relative', line numbers are relative.
+   ;; This variable can also be set to a property list for finer control:
+   ;; '(:relative nil
+   ;;   :disabled-for-modes dired-mode
+   ;;                       doc-view-mode
+   ;;                       markdown-mode
+   ;;                       org-mode
+   ;;                       pdf-view-mode
+   ;;                       text-mode
+   ;;   :size-limit-kb 1000)
    ;; (default nil)
    dotspacemacs-line-numbers t
    ;; Code folding method. Possible values are `evil' and `origami'.
    ;; (default 'evil)
-   dotspacemacs-folding-method 'evil
+   dotspacemacs-folding-method 'origami
    ;; If non-nil smartparens-strict-mode will be enabled in programming modes.
    ;; (default nil)
    dotspacemacs-smartparens-strict-mode nil
@@ -314,12 +306,6 @@ executes.
  This function is mostly useful for variables that need to be set
 before packages are loaded. If you are unsure, you should try in setting them in
 `dotspacemacs/user-config' first."
-  ;; shells
-  (setenv "PATH" (shell-command-to-string "/bin/zsh -c 'echo -n $PATH'"))
-  (add-to-list 'auto-mode-alist '("\\.zsh$" . shell-script-mode))
-  (add-to-list `exec-path "/Users/jwong/.nvm/versions/node/v6.6.0/bin/")
-
-  (add-hook 'react-mode-hook 'emmet-mode)
   )
 
 (defun dotspacemacs/user-config ()
@@ -341,11 +327,9 @@ you should place your code here."
     (setq web-mode-code-indent-offset n) ; web-mode, js code in html file
     (setq web-mode-css-indent-offset n) ; web-mode, css in html file
     (setq web-mode-markup-indent-offset n) ; web-mode, html tag in html file
-    ;; elm
-    (setq elm-indent-offset 2)
+    (setq elm-indent-offset n) ;; elm
     )
 
-  ;; Defaults
   (setq-default truncate-lines t)
   (my-setup-indent 2)
   (setq require-final-newline t)
@@ -354,38 +338,6 @@ you should place your code here."
         scroll-margin 1
         scroll-preserve-screen-position 't)
 
-
-  ;; JS Syntax Checker
-  (setq js2-mode-show-parse-errors nil
-        js2-mode-show-strict-warnings nil)
-  (setq flycheck-javascript-eslint-executable "eslint_d")
-  (defun feltnerm/setup-local-eslint ()
-    "If ESLint found in node_modules directory - use that for flycheck.
-Intended for use in PROJECTILE-AFTER-SWITCH-PROJECT-HOOK."
-    (interactive)
-    (let ((local-eslint (expand-file-name (concat (projectile-project-root) "node_modules/.bin/eslint"))))
-      (setq flycheck-javascript-eslint-executable
-            (and (file-exists-p local-eslint) local-eslint))))
-  (with-eval-after-load 'projectile
-    (add-hook 'projectile-after-switch-project-hook 'feltnerm/setup-local-eslint))
-  (defun codefalling//reset-eslint-rc ()
-    (let ((rc-path (if (projectile-project-p)
-                       (concat (projectile-project-root) ".eslintrc"))))
-      (if (file-exists-p rc-path)
-          (progn
-            (message rc-path)
-            (setq flycheck-eslintrc rc-path)))))
-  (add-hook 'react-mode-hook 'codefalling//reset-eslint-rc)
-  ;; (add-hook 'flycheck-mode-hook 'codefalling//reset-eslint-rc)
-
-  ;; Diff HL
-  ;; (diff-hl-flydiff-mode t)
-  ;; (diff-hl-margin-mode t)
-  ;; (setq diff-hl-side 'right)
-
-  (add-hook 'elm-mode-hook 'flycheck-mode)
-
-  ;; React
   (add-to-list 'auto-mode-alist '("\\.js\\'" . react-mode))
   )
 
@@ -398,7 +350,7 @@ Intended for use in PROJECTILE-AFTER-SWITCH-PROJECT-HOOK."
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (swift-mode bind-key packed avy bind-map evil simple-httpd haml-mode tern csv-mode skewer-mode pcre2el powerline rake spinner hydra highlight git-gutter company auto-complete mmm-mode markdown-toc markdown-mode gh-md flycheck-elm elm-mode multiple-cursors anzu iedit smartparens undo-tree elixir-mode flycheck yasnippet helm helm-core async inf-ruby inflections projectile f js2-mode dash s yapfify pyvenv pytest pyenv-mode py-isort pip-requirements live-py-mode hy-mode helm-pydoc cython-mode company-anaconda anaconda-mode pythonic ob-elixir minitest hide-comnt smeargle orgit org magit-gitflow helm-gitignore gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link evil-magit magit magit-popup git-commit with-editor origami yaml-mode xterm-color ws-butler window-numbering which-key web-mode web-beautify volatile-highlights vi-tilde-fringe uuidgen use-package toc-org tern-auto-complete tagedit spacemacs-theme spaceline slim-mode shell-pop scss-mode sass-mode rvm ruby-tools ruby-test-mode rubocop rspec-mode robe reveal-in-osx-finder restart-emacs request rbenv rainbow-delimiters quelpa pug-mode projectile-rails popwin persp-mode pbcopy paradox osx-trash osx-dictionary org-plus-contrib org-bullets open-junk-file neotree mwim multi-term move-text monokai-theme macrostep lorem-ipsum livid-mode linum-relative link-hint less-css-mode launchctl json-mode js2-refactor js-doc info+ indent-guide ido-vertical-mode hungry-delete hl-todo highlight-parentheses highlight-numbers highlight-indentation help-fns+ helm-themes helm-swoop helm-projectile helm-mode-manager helm-make helm-ls-git helm-flx helm-descbinds helm-css-scss helm-company helm-c-yasnippet helm-ag google-translate golden-ratio git-gutter-fringe git-gutter-fringe+ flycheck-pos-tip flycheck-mix flycheck-flow flx-ido fill-column-indicator feature-mode fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu eshell-z eshell-prompt-extras esh-help emmet-mode elisp-slime-nav editorconfig dumb-jump diff-hl company-web company-tern company-statistics column-enforce-mode coffee-mode clean-aindent-mode chruby bundler auto-yasnippet auto-highlight-symbol auto-compile alchemist aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line ac-ispell))))
+    (scss-mode origami alert log4e gntp markdown-mode skewer-mode simple-httpd json-snatcher json-reformat multiple-cursors js2-mode haml-mode gitignore-mode fringe-helper git-gutter+ git-gutter magit magit-popup git-commit with-editor web-completion-data dash-functional tern pos-tip yasnippet auto-complete flycheck company elixir-mode define-word yapfify yaml-mode xterm-color ws-butler winum which-key web-mode web-beautify volatile-highlights vi-tilde-fringe uuidgen use-package unfill toc-org tern-auto-complete tagedit swift-mode spaceline smeargle slim-mode shell-pop sass-mode rvm ruby-tools ruby-test-mode rubocop rspec-mode robe reveal-in-osx-finder restart-emacs rbenv rainbow-delimiters pyvenv pytest pyenv-mode py-isort pug-mode projectile-rails popwin pip-requirements persp-mode pbcopy paradox osx-trash osx-dictionary orgit org-projectile org-present org-pomodoro org-download org-bullets open-junk-file ob-elixir neotree mwim multi-term move-text monokai-theme mmm-mode minitest markdown-toc magit-gitflow macrostep lorem-ipsum livid-mode live-py-mode linum-relative link-hint less-css-mode launchctl json-mode js2-refactor js-doc info+ indent-guide hy-mode hungry-delete htmlize hl-todo highlight-parentheses highlight-numbers highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-pydoc helm-projectile helm-mode-manager helm-make helm-ls-git helm-gitignore helm-flx helm-descbinds helm-css-scss helm-company helm-c-yasnippet helm-ag google-translate golden-ratio gnuplot gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe git-gutter-fringe+ gh-md fuzzy flycheck-pos-tip flycheck-mix flycheck-elm flycheck-credo flx-ido fill-column-indicator feature-mode fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu eshell-z eshell-prompt-extras esh-help emmet-mode elm-mode elisp-slime-nav editorconfig dumb-jump direnv diff-hl cython-mode csv-mode company-web company-tern company-statistics company-anaconda column-enforce-mode coffee-mode clean-aindent-mode chruby bundler auto-yasnippet auto-highlight-symbol auto-compile alchemist aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line ac-ispell))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
