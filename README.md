@@ -24,6 +24,46 @@ A terminal multiplexer. [[website](http://tmux.sourceforge.net/)]
 # Spacemacs
 Another editor. [[website](http://spacemacs.org/)]
 
+### User Config
+```lisp
+  (spacemacs|use-package-add-hook org
+    :pre-init
+    (package-initialize)
+    )
+
+  (defun my-setup-indent (n)
+    ;; web development
+    (setq coffee-tab-width n) ; coffeescript
+    (setq css-indent-offset n) ; css-mode
+    (setq javascript-indent-level n) ; javascript-mode
+    (setq js-indent-level n) ; js-mode
+    (setq js2-basic-offset n) ; js2-mode
+    (setq standard-indent n)
+    (setq web-mode-attr-indent-offset n)
+    (setq web-mode-code-indent-offset n) ; web-mode, js code in html file
+    (setq web-mode-css-indent-offset n) ; web-mode, css in html file
+    (setq web-mode-markup-indent-offset n) ; web-mode, html tag in html file
+    (setq elm-indent-offset n) ;; elm
+    (setq typescript-indent-level n) ;; typescript
+    )
+
+  (require 'flycheck-joker)
+
+  (setq-default truncate-lines t)
+  (my-setup-indent 2)
+  (setq require-final-newline t)
+  (setq mode-require-final-newline t)
+  (setq scroll-conservatively 101
+        scroll-margin 1
+        scroll-preserve-screen-position 't)
+
+  (add-to-list 'auto-mode-alist '("\\.js\\'" . react-mode))
+  (add-to-list 'auto-mode-alist '("\\.tsx\\'" . react-mode))
+  (add-hook 'react-mode-hook 'prettier-js-mode)
+  (add-hook 'typescript-mode-hook 'prettier-js-mode)
+  (add-to-list 'auto-mode-alist '("\\.gql\\'" . graphql-mode))
+```
+
 # iTerm2
 A better terminal. [[website](https://www.iterm2.com/)]
 
