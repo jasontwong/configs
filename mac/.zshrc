@@ -10,7 +10,7 @@ ZSH_THEME="plums"
 # Example aliases
 # alias zshconfig="vim ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-alias gvimdiff="gvim -d"
+# alias gvimdiff="gvim -d"
 
 # Set to this to use case-sensitive completion
 # CASE_SENSITIVE="true"
