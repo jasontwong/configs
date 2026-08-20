@@ -4,7 +4,7 @@ A community-driven framework for managing zsh configurations with plugins. [[web
 
 # tmux
 
-A terminal multiplexer. [[website](http://tmux.sourceforge.net/)]
+A terminal multiplexer. [[website](https://github.com/tmux/tmux)]
 
 - Used in conjunction with [tmuxinator](https://github.com/tmuxinator/tmuxinator)
 
