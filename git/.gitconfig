@@ -13,6 +13,8 @@
   ui = true
 [push]
   default = tracking
+[init]
+  defaultBranch = main
 [branch]
   autosetuprebase = always
 [alias]
