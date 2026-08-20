@@ -7,11 +7,26 @@ A community-driven framework for managing zsh configurations with plugins. [[web
 A terminal multiplexer. [[website](http://tmux.sourceforge.net/)]
 
 - Used in conjunction with [tmuxinator](https://github.com/tmuxinator/tmuxinator)
+
+### macOS — `tmux/.tmux.conf`
+
 - `reattach-to-user-namespace` This application fixes copy/paste for Mac OSX when using tmux
 
   brew install reattach-to-user-namespace
 
-Testing
+### Linux — `linux/.tmux.conf`
+
+Converted from the macOS config. The differences:
+
+- `default-shell` is `/usr/bin/bash` instead of `/bin/zsh`
+- copy/paste pipes through `wl-copy` on Wayland, falling back to `xclip` on X11
+  (no `reattach-to-user-namespace` shim is needed)
+
+  sudo apt install wl-clipboard xclip
+
+- `default-terminal` is `tmux-256color` instead of `screen-256color`, with the
+  `*:RGB` terminal feature declared for truecolor
+- `history-limit` is 50000
 
 # Vim
 
