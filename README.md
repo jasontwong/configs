@@ -48,7 +48,7 @@ Converted from the macOS config. The differences:
 
 # Spacemacs
 
-Another editor. [[website](http://spacemacs.org/)]
+Another editor. [[website](https://www.spacemacs.org/)]
 
 ### User Config
 
@@ -99,7 +99,7 @@ A better terminal. [[website](https://www.iterm2.com/)]
 
 # Homebrew
 
-Allows the use of UNIX tools in OSX. [[website](http://mxcl.github.com/homebrew/)]
+Allows the use of UNIX tools in OSX. [[website](https://brew.sh)]
 
 # Extended attributes
 
